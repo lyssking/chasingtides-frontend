@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChasingTides | Master Your Cellular Current</title>
+    <!-- Favicon Browser Tab Link using SVG code -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23059669'><path d='M.003 12.5a.5.5 0 0 0 .5.5H15.5a.5.5 0 0 0 0-1H.503a.5.5 0 0 0-.5.5zm.754-4.246a.385.385 0 0 0 .54 0l1.13-1.13a.385.385 0 0 1 .54 0l3.83 3.83a.385.385 0 0 0 .54 0l5.385-5.386a.385.385 0 0 1 .54 0l1.13 1.13a.385.385 0 0 0 .54 0 .385.385 0 0 0 0-.54l-1.13-1.13a1.385 1.385 0 0 0-1.96 0L8.13 10.13a.385.385 0 0 1-.54 0L3.76 6.3a1.385 1.385 0 0 0-1.96 0L.757 7.714a.385.385 0 0 0 0 .54z'/></svg>">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --brand-primary: #064e3b;
+            --brand-accent: #b45309;
+            --brand-dark: #0f172a;
+        }
+        body { font-family: system-ui, sans-serif; background: #f8fafc; color: var(--brand-dark); }
+        .bg-brand-primary { background-color: var(--brand-primary); }
+        .text-brand-accent { color: var(--brand-accent); }
+        
+        /* Hero Section Custom Styles */
+        .hero-banner {
+            background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 100px;
+            background: linear-gradient(to top, #f8fafc, transparent);
+        }
+        .btn-conversion {
+            background-color: var(--brand-accent);
+            color: white; font-weight: 700; border: none;
+            transition: all 0.2s ease;
+        }
+        .btn-conversion:hover { background-color: #92400e; color: white; transform: translateY(-2px); }
+        .product-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border: none; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom py-3 sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <i class="bi bi-tsunami text-success fs-4"></i>
+                <span class="fw-extrabold">ChasingTides</span>
+            </a>
+            <div class="ms-auto">
+                <ul class="navbar-nav gap-3 flex-row">
+                    <li class="nav-item"><a class="nav-link fw-bold text-success" href="#catalog">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary" href="/contact">Support</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Interactive Hero Banner Workspace -->
+    <section class="hero-banner text-white">
+        <div class="container position-relative style="z-index: 2;">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <span class="badge bg-success-subtle text-success border border-success mb-3 px-3 py-2 rounded-pill fw-bold">
+                        <i class="bi bi-activity me-1"></i> NEXT-GENERATION CELLULAR PURITY
+                    </span>
+                    <h1 class="display-3 fw-black mb-3 text-white" style="line-height: 1.1;">Master Your Cellular Current.</h1>
+                    <p class="lead opacity-75 mb-4 fs-5">Premium, independently certified research compounds engineered to optimize biological resilience and metabolic synchronization.</p>
+                    <a href="#catalog" class="btn btn-conversion btn-lg px-4 py-3 rounded-3 shadow">
+                        Explore Research Catalog <i class="bi bi-arrow-down ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Catalog Grid Corridor -->
+    <main id="catalog" class="container my-5 py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark h1">Available Compound Registries</h2>
+            <p class="text-muted">Every batch is verified via independent 3rd-party HPLC testing profiles.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Inline Product Display Map -->
+            <% products.forEach(product => { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card product-card shadow-sm rounded-4 overflow-hidden h-100 bg-white">
+                        <div class="bg-light d-flex align-items-center justify-content-center py-5 position-relative">
+                            <% if (product.image) { %>
+                                <img src="<%= product.image %>" class="img-fluid" style="max-height: 200px; object-fit: contain;" alt="<%= product.title %>">
+                            <% } else { %>
+                                <div class="text-muted p-5 text-center"><i class="bi bi-box-seam display-4 text-success opacity-50"></i></div>
+                            <% } %>
+                            <span class="position-absolute top-0 end-0 bg-dark text-white small px-3 py-1 m-3 rounded-pill fw-bold">99.8% Purity</span>
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="h5 fw-bold mb-2 text-dark"><%= product.title %></h3>
+                                <p class="text-secondary small mb-4">Optimized matrix formula for accelerated tissue structural synthesis and systemic recovery tracking.</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between pt-2">
+                                <span class="fs-4 fw-black text-brand-primary">$<%= product.price %></span>
+                                <a href="/products/<%= product.slug %>" class="btn btn-outline-success px-4 rounded-3 fw-bold">
+                                    View Protocol
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-muted small border-top bg-white">
+        &copy; 2026 ChasingTides Labs. All rights reserved. Master Your Cellular Current.
+    </footer>
+
+</body>
+</html>

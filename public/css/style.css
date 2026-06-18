@@ -1,0 +1,95 @@
+/* public/css/style.css */
+
+body {
+    background-color: #f9fafb;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Trust Bar / Primary Theme Accent Color */
+.bg-brand-primary {
+    background-color: #064e3b !important; /* Deep Forest Green */
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+}
+
+/* Supplemental Highlights */
+.text-brand-accent {
+    color: #047857; /* Emerald Green */
+}
+
+/* High-Conversion CTA Callout Styling */
+.btn-conversion {
+    background-color: #f59e0b !important; /* Electric Amber */
+    color: #ffffff !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-conversion:hover {
+    background-color: #d97706 !important; /* Richer Amber */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+/* Highlight borders for payment components */
+.border-brand-primary {
+    border-color: #064e3b !important; /* Matches your Deep Forest Green theme */
+}
+
+/* Subtle input enhancements */
+.form-control:focus {
+    border-color: #047857;
+    box-shadow: 0 0 0 0.25rem rgba(4, 120, 87, 0.15);
+}
+
+/* Typography styles for labels */
+.tracking-wider {
+    letter-spacing: 0.08rem;
+}
+:root {
+    --brand-primary: #064e3b;  /* Deep Forest Green */
+    --brand-accent: #b45309;   /* Electric Amber */
+    --brand-success: #059669;  /* Emerald Green */
+    --brand-dark: #0f172a;     /* Slate Dark */
+}
+
+/* Navbar Typography & Branding */
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: 0.05rem;
+    color: var(--brand-dark) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #475569 !important;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--brand-primary) !important;
+}
+
+/* Breadcrumbs Design */
+.breadcrumb-wrapper {
+    background-color: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumb-item a {
+    color: var(--brand-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item.active {
+    color: #94a3b8;
+}
+html {
+    scroll-behavior: smooth;
+}

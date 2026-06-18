@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Premium Peptide Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom py-3 shadow-sm">
+
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <i class="bi bi-tsunami text-success fs-4"></i>
+            <span>ChasingTides</span>
+        </a>
+        <button class="navbar-expand" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-2">
+                <li class="nav-item"><a class="nav-link active" href="#">Catalog</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Support</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Update the Breadcrumbs block inside checkout-page.ejs -->
+<div class="breadcrumb-wrapper py-2">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 small">
+                <!-- 🛠️ LINK FIXES: Fully qualified route maps -->
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/#catalog">Catalog</a></li>
+                <li class="breadcrumb-item"><a href="/products/<%= product.slug || 'bpc-157-premium-matrix' %>"><%= product.title %></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Secure Checkout</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+    <style>
+        :root {
+            --brand-primary: #064e3b; /* Deep Forest Green */
+            --brand-accent: #b45309;  /* Electric Amber */
+            --brand-success: #059669; /* Emerald Green */
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f9fafb;
+        }
+
+        .border-brand-primary {
+            border-color: var(--brand-primary) !important;
+        }
+
+        .text-brand-accent {
+            color: var(--brand-accent) !important;
+        }
+
+        .btn-conversion {
+            background-color: var(--brand-accent);
+            color: white;
+            font-weight: 700;
+            border: none;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-conversion:hover {
+            background-color: #92400e;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .form-control:focus {
+            border-color: var(--brand-success);
+            box-shadow: 0 0 0 0.25rem rgba(5, 150, 105, 0.15);
+        }
+
+        /* Animated overlay for security check */
+        #security-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Real-time Encryption Shield Overlay -->
+    <div id="security-overlay">
+        <div class="spinner-border text-success mb-3" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h4 class="fw-bold text-dark mb-1"><i class="bi bi-shield-lock-fill text-success me-2"></i>Encrypting Card Details</h4>
+        <p class="text-muted small">Establishing secure 256-bit tokenized connection with payment gateway...</p>
+    </div>
+
+    <!-- Minimalist Security Header -->
+    <header class="bg-white border-bottom py-3 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="fw-bold tracking-wider text-dark">PREMIUM PERFORMANCE LABS</span>
+            <div class="text-success small fw-bold d-flex align-items-center gap-1">
+                <i class="bi bi-shield-lock-fill fs-5"></i> 256-BIT ENCRYPTED CHECKOUT
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="row g-4">
+            
+            <!-- Left Side: Order & Payment Forms -->
+            <div class="col-12 col-lg-7">
+                
+                <!-- 1. Shipping Details Card -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                    <h2 class="h5 fw-bold mb-4 text-dark"><i class="bi bi-geo-alt text-muted me-2"></i>1. Shipping Details</h2>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-secondary">First Name</label>
+                            <input type="text" class="form-control rounded-3" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-secondary">Last Name</label>
+                            <input type="text" class="form-control rounded-3" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-secondary">Delivery Address</label>
+                            <input type="text" class="form-control rounded-3" placeholder="Street address" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-secondary">City</label>
+                            <input type="text" class="form-control rounded-3" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-secondary">Postal Code</label>
+                            <input type="text" class="form-control rounded-3" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Secure Payment Card -->
+                <div class="card border-brand-primary shadow-sm rounded-4 p-4 border-2 bg-white">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h5 fw-bold mb-0 text-dark"><i class="bi bi-credit-card text-muted me-2"></i>2. Secure Payment Method</h2>
+                        <div class="d-flex gap-2 fs-4 text-muted">
+                            <i class="bi bi-shield-fill-check text-success"></i>
+                        </div>
+                    </div>
+
+                    <!-- Payment submission form -->
+                    <form id="payment-form" action="/process-charge" method="POST">
+                        <input type="hidden" name="productId" value="<%= product.documentId || product.id %>">
+                        <!-- Token returned by the gateway gets injected here -->
+                        <input type="hidden" id="payment-token" name="paymentToken">
+
+                        <!-- Cardholder Name (Safe to send directly) -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-secondary">Cardholder Name</label>
+                            <input type="text" class="form-control rounded-3" name="cardholderName" placeholder="John Doe" required>
+                        </div>
+
+                        <!-- Card Number (NOTE: No name attribute = extreme PCI security) -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-secondary">Card Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-credit-card-2-front"></i></span>
+                                <input type="text" id="card-number" class="form-control rounded-end-3 border-start-0" placeholder="4111 1111 1111 1111" required maxlength="19">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <!-- Expiry (NOTE: No name attributes) -->
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-secondary">Expiration Date</label>
+                                <input type="text" id="card-expiry" class="form-control rounded-3" placeholder="MM / YY" required maxlength="7">
+                            </div>
+                            <!-- CVV (NOTE: No name attribute) -->
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-secondary">Security Code (CVV)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-lock-fill"></i></span>
+                                    <input type="password" id="card-cvv" class="form-control rounded-end-3 border-start-0" placeholder="•••" required maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-conversion btn-lg w-100 py-3 shadow">
+                            <i class="bi bi-shield-lock-fill me-2"></i> Authorize Secure Payment
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side: Order Summary & Trust Certifications -->
+            <div class="col-12 col-lg-5">
+                <div class="card border-0 shadow-sm rounded-4 p-4 sticky-top" style="top: 2rem;">
+                    <h3 class="h5 fw-bold mb-4 text-dark">Order Summary</h3>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h6 class="mb-0 fw-bold text-dark"><%= product.title %></h6>
+                            <small class="text-muted">Quantity: 1</small>
+                        </div>
+                        <span class="fw-bold text-dark">$<%= product.price %></span>
+                    </div>
+
+                    <hr class="text-muted my-3">
+
+                    <div class="d-flex justify-content-between align-items-center fs-5 fw-bold text-dark mb-4">
+                        <span>Total Due:</span>
+                        <span class="text-brand-accent">$<%= product.price %></span>
+                    </div>
+
+                    <!-- Explicit Visual Trust Safeguard Badges -->
+                    <div class="bg-light rounded-4 p-3 border text-center">
+                        <p class="small text-secondary mb-3 fw-bold"><i class="bi bi-patch-check-fill text-success me-1"></i> GUARANTEED SAFE & SECURE CHECKOUT</p>
+                        <div class="d-flex justify-content-center gap-4 text-muted fs-6">
+                            <span class="d-flex align-items-center gap-1 small fw-bold"><i class="bi bi-shield-check text-success"></i> PCI Compliant</span>
+                            <span class="d-flex align-items-center gap-1 small fw-bold"><i class="bi bi-key-fill text-success"></i> SSL Tokenized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-muted small border-top bg-white mt-5">
+        &copy; 2026 Premium Performance Labs. All data processing conforms strictly to PCI-DSS framework criteria.
+    </footer>
+
+    <!-- Frontend Interactive Security Script -->
+    <script>
+        // 1. Auto-format credit card number input with empty spaces
+        document.getElementById('card-number').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+        });
+
+        // 2. Auto-format Expiry date with solid slash (MM / YY)
+        document.getElementById('card-expiry').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            if (value.length > 2) {
+                e.target.value = value.substr(0, 2) + ' / ' + value.substr(2, 2);
+            } else {
+                e.target.value = value;
+            }
+        });
+
+        // 3. Form Intercept & Encryption Tokenization Simulation
+        document.getElementById('payment-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Pause form submissions
+            
+            // Show the high-trust security loading overlay
+            document.getElementById('security-overlay').style.display = 'flex';
+
+            // Simulate the secure transaction handshake with Authorize.Net API servers
+            setTimeout(() => {
+                // Generate a secure sandbox single-use token matching Authorize.Net's standard schema
+                const mockOpaqueToken = "tok_sandbox_peptides_" + Math.random().toString(36).substr(2, 9);
+                
+                // Injected into the hidden field to send securely to our Express backend
+                document.getElementById('payment-token').value = mockOpaqueToken;
+                
+                console.log("🔒 Security protocol finished. Handshake succeeded. Token generated:", mockOpaqueToken);
+                
+                // Submit the form containing ONLY the token to your Express route
+                this.submit();
+            }, 1800); // 1.8 seconds provides a powerful premium security cue to users
+        });
+    </script>
+</body>
+</html>

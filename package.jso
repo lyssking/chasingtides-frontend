@@ -1,0 +1,1 @@
+{"name":"peptides-frontend","version":"1.0.0","type":"module","main":"app.js","dependencies":{"authorizenet":"^1.0.8","dotenv":"^16.4.5","express":"^4.19.2"}} 
