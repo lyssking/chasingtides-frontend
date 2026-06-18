@@ -30,6 +30,41 @@ console.log(`🖼️ Media asset base path resolved to: ${STRAPI_BASE_URL}`);
  * 1. ROUTE: Display the Single Product Page
  * Fetches dynamic metadata directly from your Strapi instance
  */
+/**
+ * 0. ROUTE: Storefront Homepage
+ * Automatically lists all published items or displays a main catalog home
+ */
+app.get('/', async (req, res) => {
+  try {
+    // Fetch your published collection records from the live Strapi Engine
+    const response = await fetch(`${STRAPI_API_URL}/products?populate=*`);
+    const jsonResult = await response.json();
+    const products = jsonResult.data || [];
+
+    // If you have a dedicated index template, render it:
+    // res.render('index', { products });
+    
+    // Fallback: If you just want the homepage link to instantly open your premium peptide product:
+    if (products.length > 0 && products[0].slug) {
+      return res.redirect(`/products/${products[0].slug}`);
+    }
+
+    res.send(`
+      <div style="font-family: system-ui, sans-serif; text-align: center; padding: 80px 20px; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #064e3b; font-weight: 800; font-size: 2.2rem;">🌊 Chasing Tides Live Portal</h2>
+        <p style="color: #6c757d; font-size: 1.1rem; margin: 20px 0;">Frontend storefront is fully online and connected securely to your Strapi API cloud framework!</p>
+        <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-weight: bold; color: #374151;">
+          Total Active Catalog Items: ${products.length}
+        </div>
+        <p style="margin-top: 30px; color: #9ca3af; font-size: 0.9rem;">To view a profile, use your product link: /products/[slug]</p>
+      </div>
+    `);
+  } catch (error) {
+    console.error('Homepage catalog connection error:', error);
+    res.status(500).send('Storefront portal resolving configurations...');
+  }
+});
+
 app.get('/products/:slug', async (req, res) => {
   try {
     const productSlug = req.params.slug;
