@@ -30,14 +30,12 @@
 <div class="breadcrumb-wrapper py-2">
     <div class="container">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 small">
-                <!-- 🛠️ LINK FIXES: Fully qualified route maps -->
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/#catalog">Catalog</a></li>
-                <li class="breadcrumb-item"><a href="/products/<%= product.slug || 'bpc-157-premium-matrix' %>"><%= product.title %></a></li>
-                <li class="breadcrumb-item active" aria-current="page">Secure Checkout</li>
-            </ol>
-        </nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/">Products</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= product.title %></li>
+  </ol>
+</nav>
     </div>
 </div>
     <style>
